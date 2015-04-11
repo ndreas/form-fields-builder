@@ -1,0 +1,18 @@
+{
+  "name": "form-fields-builder",
+  "version": "0.1.0",
+  "description": "Generic builder for generating form fields from JS objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Andreas Johansson",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "mocha": "^2.2.4"
+  },
+  "dependencies": {
+    "lodash": "^3.7.0"
+  }
+}
