@@ -5,6 +5,23 @@ describe("utils", function() {
         b.utils.modelName = function(model) { return model._name; }
     });
 
+    describe("extractOptions()", function() {
+        var extractOptions = b.utils.extractOptions;
+
+        it("removes the specified options from an object that is a mix of options and other keys into a separate object", function() {
+            var o = { a:1, b:2, c:3 };
+            expect(
+                extractOptions(o, { a:2, b:3, d:4 })
+            ).to.deep.equal({ a:1, b:2, d:4 });
+            expect(o).to.deep.equal({ c:3 });
+        });
+        it("handles empty and invalid objects", function() {
+            var d = {};
+            expect(extractOptions({}, d)).to.deep.equal(d);
+            expect(extractOptions(null, d)).to.deep.equal(d);
+        });
+    });
+
     describe("errorMessages", function() {
         var errorMessages = b.utils.errorMessages;
 
