@@ -17,8 +17,8 @@ builder.reset = function() {
 
 builder.reset();
 
-builder.use = function(definition) {
+builder.use = function(definition, options) {
     _.map(definition, function(adapter, type) {
-        require('./lib/' + type + '-adapters/' + adapter)(builder);
+        require('./lib/' + type + '-adapters/' + adapter)(builder, options);
     });
 }
