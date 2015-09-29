@@ -135,20 +135,20 @@ describe("inputs", function() {
         it("generates a checkbox", function() {
             expect(
                 checkbox(model, 'field', 'My Value')
-            ).to.equal('<input id="model-name-field-my-value" name="modelName[field][]" type="checkbox" value="My Value">');
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="My Value">');
         });
         it("supports setting extra attributes", function() {
             expect(
                 checkbox(model, 'field', 'My Value', { class: 'cls' })
-            ).to.equal('<input class="cls" id="model-name-field-my-value" name="modelName[field][]" type="checkbox" value="My Value">');
+            ).to.equal('<input class="cls" id="model-name-field" name="modelName[field]" type="checkbox" value="My Value">');
         });
         it("sets the checked attribute if the model's field includes the specified value", function() {
             expect(
                 checkbox(model, 'field', 'foo')
-            ).to.equal('<input id="model-name-field-foo" name="modelName[field][]" type="checkbox" value="foo" checked>');
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="foo" checked>');
             expect(
                 checkbox(model, 'field', 'bar')
-            ).to.equal('<input id="model-name-field-bar" name="modelName[field][]" type="checkbox" value="bar" checked>');
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="bar" checked>');
         });
     });
 
