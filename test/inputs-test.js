@@ -23,6 +23,14 @@ describe("inputs", function() {
                 input(model, 'field', { class: 'cls' })
             ).to.equal('<input class="cls" id="model-name-field" name="modelName[field]" value="&lt;&gt;&amp;&#39;&quot;">');
         });
+        it("handles non-string values", function() {
+            expect(
+                input({ _name: 'ModelName', field: 1 }, 'field')
+            ).to.equal('<input id="model-name-field" name="modelName[field]" value="1">');
+            expect(
+                input({ _name: 'ModelName', field: true }, 'field')
+            ).to.equal('<input id="model-name-field" name="modelName[field]" value="true">');
+        });
     });
 
     describe("regular inputs, similar to type='text'", function() {
@@ -71,6 +79,14 @@ describe("inputs", function() {
             expect(
                 textarea(model, 'field', { class: 'cls' })
             ).to.equal('<textarea class="cls" id="model-name-field" name="modelName[field]">&lt;&gt;&amp;&#39;&quot;</textarea>');
+        });
+        it("handles non-string values", function() {
+            expect(
+                textarea({ _name: 'ModelName', field: 1 }, 'field')
+            ).to.equal('<textarea id="model-name-field" name="modelName[field]">1</textarea>');
+            expect(
+                textarea({ _name: 'ModelName', field: true }, 'field')
+            ).to.equal('<textarea id="model-name-field" name="modelName[field]">true</textarea>');
         });
     });
 
@@ -150,6 +166,14 @@ describe("inputs", function() {
                 checkbox(model, 'field', 'bar')
             ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="bar" checked>');
         });
+        it("handles non-string values", function() {
+            expect(
+                checkbox(model, 'field', 1)
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="1">');
+            expect(
+                checkbox(model, 'field', true)
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="true">');
+        });
     });
 
     describe("radio()", function() {
@@ -172,6 +196,14 @@ describe("inputs", function() {
             expect(
                 radio(model, 'field', 'fieldval')
             ).to.equal('<input id="model-name-field-fieldval" name="modelName[field]" type="radio" value="fieldval" checked>');
+        });
+        it("handles non-string values", function() {
+            expect(
+                radio(model, 'field', 1)
+            ).to.equal('<input id="model-name-field-1" name="modelName[field]" type="radio" value="1">');
+            expect(
+                radio(model, 'field', true)
+            ).to.equal('<input id="model-name-field-true" name="modelName[field]" type="radio" value="true">');
         });
     });
 });

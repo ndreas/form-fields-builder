@@ -52,6 +52,14 @@ describe("utils", function() {
                 domId({ _name: 'ModelName'}, 'fieldName')
             ).to.equal('model-name-field-name');
         });
+        it("supports non-string values", function() {
+            expect(
+                domId({ _name: 'ModelName'}, 'fieldName', 1)
+            ).to.equal('model-name-field-name-1');
+            expect(
+                domId({ _name: 'ModelName'}, 'fieldName', true)
+            ).to.equal('model-name-field-name-true');
+        });
     });
 
     describe("inputName()", function() {
