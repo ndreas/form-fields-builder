@@ -146,7 +146,7 @@ describe("inputs", function() {
         var checkbox = b.inputs.checkbox;
         var model = {
             _name: 'ModelName',
-            field: [ 'foo', 'bar' ]
+            field: 'foo'
         };
         it("generates a checkbox", function() {
             expect(
@@ -158,13 +158,10 @@ describe("inputs", function() {
                 checkbox(model, 'field', 'My Value', { class: 'cls' })
             ).to.equal('<input class="cls" id="model-name-field" name="modelName[field]" type="checkbox" value="My Value">');
         });
-        it("sets the checked attribute if the model's field includes the specified value", function() {
+        it("sets the checked attribute if the model's field is the specified value", function() {
             expect(
                 checkbox(model, 'field', 'foo')
             ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="foo" checked>');
-            expect(
-                checkbox(model, 'field', 'bar')
-            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="bar" checked>');
         });
         it("handles non-string values", function() {
             expect(
