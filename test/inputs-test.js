@@ -30,6 +30,12 @@ describe("inputs", function() {
             expect(
                 input({ _name: 'ModelName', field: true }, 'field')
             ).to.equal('<input id="model-name-field" name="modelName[field]" value="true">');
+            expect(
+                input({ _name: 'ModelName', field: undefined }, 'field')
+            ).to.equal('<input id="model-name-field" name="modelName[field]" value="">');
+            expect(
+                input({ _name: 'ModelName', field: false }, 'field')
+            ).to.equal('<input id="model-name-field" name="modelName[field]" value="false">');
         });
     });
 
@@ -87,6 +93,12 @@ describe("inputs", function() {
             expect(
                 textarea({ _name: 'ModelName', field: true }, 'field')
             ).to.equal('<textarea id="model-name-field" name="modelName[field]">true</textarea>');
+            expect(
+                textarea({ _name: 'ModelName', field: undefined }, 'field')
+            ).to.equal('<textarea id="model-name-field" name="modelName[field]"></textarea>');
+            expect(
+                textarea({ _name: 'ModelName', field: false }, 'field')
+            ).to.equal('<textarea id="model-name-field" name="modelName[field]">false</textarea>');
         });
     });
 
@@ -170,6 +182,12 @@ describe("inputs", function() {
             expect(
                 checkbox(model, 'field', true)
             ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="true">');
+            expect(
+                checkbox(model, 'field', undefined)
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="">');
+            expect(
+                checkbox(model, 'field', false)
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="checkbox" value="false">');
         });
     });
 
@@ -201,6 +219,12 @@ describe("inputs", function() {
             expect(
                 radio(model, 'field', true)
             ).to.equal('<input id="model-name-field-true" name="modelName[field]" type="radio" value="true">');
+            expect(
+                radio(model, 'field', undefined)
+            ).to.equal('<input id="model-name-field" name="modelName[field]" type="radio" value="">');
+            expect(
+                radio(model, 'field', false)
+            ).to.equal('<input id="model-name-field-false" name="modelName[field]" type="radio" value="false">');
         });
     });
 });

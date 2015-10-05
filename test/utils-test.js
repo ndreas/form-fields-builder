@@ -59,6 +59,12 @@ describe("utils", function() {
             expect(
                 domId({ _name: 'ModelName'}, 'fieldName', true)
             ).to.equal('model-name-field-name-true');
+            expect(
+                domId({ _name: 'ModelName'}, 'fieldName', undefined)
+            ).to.equal('model-name-field-name');
+            expect(
+                domId({ _name: 'ModelName'}, 'fieldName', false)
+            ).to.equal('model-name-field-name-false');
         });
     });
 
