@@ -107,6 +107,7 @@ describe("inputs", function() {
         var model = {
             _name: 'ModelName',
             selected: 2,
+            selectedalt: false,
             arrayselected: [ 1, 2 ]
         };
         it("generates a select tag", function() {
@@ -124,10 +125,18 @@ describe("inputs", function() {
                 select(model, 'field', { 1: 'foo', 2: 'bar' })
             ).to.equal('<select id="model-name-field" name="modelName[field]"><option value="1">foo</option><option value="2">bar</option></select>');
         });
+        it("generates option tags using selectoptions() if the content is a nested array", function() {
+            expect(
+                select(model, 'field', [ [true, 'foo'], [false, 'bar'] ])
+            ).to.equal('<select id="model-name-field" name="modelName[field]"><option value="true">foo</option><option value="false">bar</option></select>');
+        });
         it("selects the option corresponding to the field value", function() {
             expect(
                 select(model, 'selected', { 1: 'foo', 2: 'bar' })
             ).to.equal('<select id="model-name-selected" name="modelName[selected]"><option value="1">foo</option><option value="2" selected>bar</option></select>');
+            expect(
+                select(model, 'selectedalt', [ [true, 'foo'], [false, 'bar'] ])
+            ).to.equal('<select id="model-name-selectedalt" name="modelName[selectedalt]"><option value="true">foo</option><option value="false" selected>bar</option></select>');
         });
         it("selects all matching options when the field value is an array", function() {
             expect(
@@ -141,16 +150,28 @@ describe("inputs", function() {
         var objs = {
             1: 'foo',
             2: 'bar'
-        }
+        };
+        var arr = [
+            [true, 'foo'],
+            [false, 'bar']
+        ];
         it("generates options from a collection of objects", function() {
             expect(
                 selectoptions(objs)
             ).to.equal('<option value="1">foo</option><option value="2">bar</option>');
         });
+        it("generates options from a nested array", function() {
+            expect(
+                selectoptions(arr)
+            ).to.equal('<option value="true">foo</option><option value="false">bar</option>');
+        });
         it("marks the selected value as selected", function() {
             expect(
                 selectoptions(objs, 2)
             ).to.equal('<option value="1">foo</option><option value="2" selected>bar</option>');
+            expect(
+                selectoptions(arr, false)
+            ).to.equal('<option value="true">foo</option><option value="false" selected>bar</option>');
         });
     });
 
