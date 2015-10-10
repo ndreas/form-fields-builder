@@ -9,12 +9,12 @@
   "author": "Andreas Johansson",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^2.2.0",
-    "handlebars": "^3.0.2",
-    "mocha": "^2.2.4",
-    "sequelize": "^2.0.6"
+    "chai": "^3.3.0",
+    "handlebars": "^4.0.3",
+    "mocha": "^2.3.3",
+    "sequelize": "^3.11.0"
   },
   "dependencies": {
-    "lodash": "^3.7.0"
+    "lodash": "^3.10.1"
   }
 }
