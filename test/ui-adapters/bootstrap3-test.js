@@ -259,6 +259,61 @@ describe("bootstrap3 ui adapter", function() {
         });
     });
 
+    describe("radio()", function() {
+        it("generates a radio form group", function() {
+            expect(
+                f.radio(model, 'field', 'My Value')
+            ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</label></div></div>');
+        });
+        it("adds a required marker if the field is required", function() {
+            expect(
+                f.radio(model, 'field', 'My Value', null, { required: true })
+            ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field<abbr class="required" title="Required">*</abbr></label></div></div>');
+        });
+        it("adds an error field and class if errors are present", function() {
+            expect(
+                f.radio(model, 'field', 'My Value', { field: "invalid" })
+            ).to.equal('<div class="form-group has-error"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</label></div><span class="help-block">invalid</span></div>');
+        });
+        it("adds a hint field if present", function() {
+            b.messages.hint = { ModelName: { field: 'hint text' }}
+            expect(
+                f.radio(model, 'field', 'My Value')
+            ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</label></div><span class="help-block">hint text</span></div>');
+        });
+        it("is possible to override the label text via options", function() {
+            expect(
+                f.radio(model, 'field', 'My Value', null, { label: "label text" })
+            ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> label text</label></div></div>');
+        });
+        it("is possible to override the hint text via options", function() {
+            b.messages.hint = { ModelName: { field: 'hint text' }}
+            expect(
+                f.radio(model, 'field', 'My Value', null, { hint: 'updated hint text'})
+            ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</label></div><span class="help-block">updated hint text</span></div>');
+        });
+        it("is possible to override attributes on the field, wrapper, label, input, hint and error components", function() {
+            b.messages.hint = { ModelName: { field: 'hint text' }}
+            expect(
+                f.radio(
+                    model,
+                    'field',
+                    'My Value',
+                    { field: "invalid" },
+                    {
+                        id: 'zomg-input',
+                        min: 10,
+                        fieldAttrs: { class: 'bar', id: 'zomg-field' },
+                        wrapAttrs: { class: 'zomg-wrap', id: 'zomg-wrap' },
+                        labelAttrs: { id: 'zomg-label' },
+                        errorAttrs: { class: 'zomg-errors', id: "zomg-errors" },
+                        hintAttrs: { class: 'zomg-hint', id: "zomg-hint" }
+                    }
+                )
+            ).to.equal('<div class="form-group has-error bar" id="zomg-field"><div class="zomg-wrap" id="zomg-wrap"><label id="zomg-label"><input id="zomg-input" min="10" name="modelName[field]" type="radio" value="My Value"> Field</label></div><span class="zomg-errors" id="zomg-errors">invalid</span><span class="zomg-hint" id="zomg-hint">hint text</span></div>');
+        });
+    });
+
     describe("checkboxes()", function() {
         var model = {
             _name: 'ModelName',

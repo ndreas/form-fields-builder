@@ -184,15 +184,20 @@ describe("Handlebars template adapter", function() {
             });
         });
 
-        describe("checkbox_field()", function() {
-            it("renders a checkbox field", function() {
-                var errors = { title: 'invalid' };
-                expect(
-                    template(
-                        '{{#form_fields_for model errors}}{{form_checkbox_field "title" "value" label="label text" required=true}}{{/form_fields_for}}',
-                        { model: model, errors: errors }
-                    )
-                ).to.equal(b.fields.checkbox(model, 'title', 'value', errors, { label: "label text", required: true }));
+        _.map([
+            'checkbox',
+            'radio'
+        ], function(type) {
+            describe(type + "_field()", function() {
+                it("renders a " + type + " field", function() {
+                    var errors = { title: 'invalid' };
+                    expect(
+                        template(
+                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" "value" label="label text" required=true}}{{/form_fields_for}}',
+                            { model: model, errors: errors }
+                        )
+                    ).to.equal(b.fields[type](model, 'title', 'value', errors, { label: "label text", required: true }));
+                });
             });
         });
 
@@ -201,7 +206,7 @@ describe("Handlebars template adapter", function() {
             'radios'
         ], function(type) {
             describe(type + "_field()", function() {
-                it("renders a select field", function() {
+                it("renders a " + type + " field", function() {
                     var errors = { title: 'invalid' };
                     var options = { 1: "foo", 2: "bar" }
                     expect(
@@ -264,14 +269,19 @@ describe("Handlebars template adapter", function() {
             });
         });
 
-        describe("checkbox_input()", function() {
-            it("renders a checkbox input", function() {
-                expect(
-                    template(
-                        '{{#form_fields_for model}}{{form_checkbox_input "title" "value" class="cls"}}{{/form_fields_for}}',
-                        { model: model }
-                    )
-                ).to.equal(b.inputs.checkbox(model, 'title', 'value', { class: "cls" }));
+        _.map([
+            'checkbox',
+            'radio'
+        ], function(type) {
+            describe(type + "_input()", function() {
+                it("renders a " + type + " input", function() {
+                    expect(
+                        template(
+                            '{{#form_fields_for model}}{{form_' + type + '_input "title" "value" class="cls"}}{{/form_fields_for}}',
+                            { model: model }
+                        )
+                    ).to.equal(b.inputs[type](model, 'title', 'value', { class: "cls" }));
+                });
             });
         });
     });
