@@ -20,6 +20,13 @@ describe("utils", function() {
             expect(extractOptions({}, d)).to.deep.equal(d);
             expect(extractOptions(null, d)).to.deep.equal(d);
         });
+        it("handles false and null values", function() {
+            var o = { a:null, b:false, c:false };
+            expect(
+                extractOptions(o, { a:1, b:2, d:4 })
+            ).to.deep.equal({ a:null, b:false, d:4 });
+            expect(o).to.deep.equal({ c:false });
+        });
     });
 
     describe("errorMessages", function() {
