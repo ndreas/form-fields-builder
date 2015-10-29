@@ -17,7 +17,7 @@ describe("semantic2 ui adapter", function() {
     beforeEach(function() {
         m = b.messages;
         b.messages = {
-            label: { ModelName: { field: 'Field' } },
+            label: { ModelName: { field: 'Field', field2: 'Field 2' } },
             required: { text: "*", title: "Required" }
         };
     });
@@ -317,13 +317,19 @@ describe("semantic2 ui adapter", function() {
     describe("checkboxes()", function() {
         var model = {
             _name: 'ModelName',
-            field: [ '1', '2' ]
+            field: [ '1', '2' ],
+            field2: [ true, false ]
         };
 
         it("generates a checkbox button collection form group", function() {
             expect(
                 f.checkboxes(model, 'field', { 1: "foo", 2: "bar" })
             ).to.equal('<div class="grouped fields"><label>Field</label><div class="field"><div class="ui checkbox"><input id="model-name-field-1" name="modelName[field][]" type="checkbox" value="1" checked><label for="model-name-field-1">foo</label></div></div><div class="field"><div class="ui checkbox"><input id="model-name-field-2" name="modelName[field][]" type="checkbox" value="2" checked><label for="model-name-field-2">bar</label></div></div></div>');
+        });
+        it("handles a nested array as input options", function() {
+            expect(
+                f.checkboxes(model, 'field2', [ [true, "foo"], [false, "bar"] ])
+            ).to.equal('<div class="grouped fields"><label>Field 2</label><div class="field"><div class="ui checkbox"><input id="model-name-field2-true" name="modelName[field2][]" type="checkbox" value="true" checked><label for="model-name-field2-true">foo</label></div></div><div class="field"><div class="ui checkbox"><input id="model-name-field2-false" name="modelName[field2][]" type="checkbox" value="false" checked><label for="model-name-field2-false">bar</label></div></div></div>');
         });
         it("adds a required marker if the field is required", function() {
             expect(
@@ -377,13 +383,19 @@ describe("semantic2 ui adapter", function() {
     describe("radios()", function() {
         var model = {
             _name: 'ModelName',
-            field: '1'
+            field: '1',
+            field2: false
         };
 
         it("generates a radio button collection form group", function() {
             expect(
                 f.radios(model, 'field', { 1: "foo", 2: "bar" })
             ).to.equal('<div class="grouped fields"><label>Field</label><div class="field"><div class="ui radio checkbox"><input id="model-name-field-1" name="modelName[field]" type="radio" value="1" checked><label for="model-name-field-1">foo</label></div></div><div class="field"><div class="ui radio checkbox"><input id="model-name-field-2" name="modelName[field]" type="radio" value="2"><label for="model-name-field-2">bar</label></div></div></div>');
+        });
+        it("handles a nested array as input options", function() {
+            expect(
+                f.radios(model, 'field2', [ [true, "foo"], [false, "bar"] ])
+            ).to.equal('<div class="grouped fields"><label>Field 2</label><div class="field"><div class="ui radio checkbox"><input id="model-name-field2-true" name="modelName[field2]" type="radio" value="true"><label for="model-name-field2-true">foo</label></div></div><div class="field"><div class="ui radio checkbox"><input id="model-name-field2-false" name="modelName[field2]" type="radio" value="false" checked><label for="model-name-field2-false">bar</label></div></div></div>');
         });
         it("adds a required marker if the field is required", function() {
             expect(
