@@ -49,6 +49,16 @@ describe("components", function() {
                 label(model, 'field', { required: true })
             ).to.equal('<label for="model-name-field">Label <b>content</b><abbr class="required" title="Required">*</abbr></label>');
         });
+        it("supports custom content before the label", function() {
+            expect(
+                label(model, 'field', { before: '<b>before</b>' })
+            ).to.equal('<label for="model-name-field"><b>before</b>Label <b>content</b></label>');
+        });
+        it("supports custom content before the label", function() {
+            expect(
+                label(model, 'field', { required: true, after: '<i>after</i>' })
+            ).to.equal('<label for="model-name-field">Label <b>content</b><abbr class="required" title="Required">*</abbr><i>after</i></label>');
+        });
 
         context("with content to wrap", function() {
             it("wraps content in a label with the label text after the wrapped content", function() {

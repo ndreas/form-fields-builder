@@ -71,6 +71,11 @@ describe("bootstrap3 ui adapter", function() {
                     f[type](model, 'field', null, { hint: "updated hint text" })
                 ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field">Field</label><input class="form-control" type="' + type + '" id="model-name-field" name="modelName[field]" value="&lt;&gt;&amp;&#39;&quot;"><span class="help-block">updated hint text</span></div>');
             });
+            it("is possible to add content before and after the label", function() {
+                expect(
+                    f[type](model, 'field', null, { beforeLabel: '<i>', afterLabel: '</i>' })
+                ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field"><i>Field</i></label><input class="form-control" type="' + type + '" id="model-name-field" name="modelName[field]" value="&lt;&gt;&amp;&#39;&quot;"></div>');
+            });
             it("is possible to override attributes on the field, label, input, hint and error components", function() {
                 b.messages.hint = { ModelName: { field: 'hint text' }}
                 expect(
@@ -124,6 +129,11 @@ describe("bootstrap3 ui adapter", function() {
             expect(
                 f.textarea(model, 'field', null, { hint: "updated hint text"})
             ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field">Field</label><textarea class="form-control" id="model-name-field" name="modelName[field]">&lt;&gt;&amp;&#39;&quot;</textarea><span class="help-block">updated hint text</span></div>');
+        });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.textarea(model, 'field', null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field"><i>Field</i></label><textarea class="form-control" id="model-name-field" name="modelName[field]">&lt;&gt;&amp;&#39;&quot;</textarea></div>');
         });
         it("is possible to override attributes on the field, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}
@@ -183,6 +193,11 @@ describe("bootstrap3 ui adapter", function() {
                 f.select(model, 'field', { 1: "foo", 2: "bar" }, null, { hint: "updated hint text"})
             ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field">Field</label><select class="form-control" id="model-name-field" name="modelName[field]"><option value="1" selected>foo</option><option value="2">bar</option></select><span class="help-block">updated hint text</span></div>');
         });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.select(model, 'field', { 1: "foo", 2: "bar" }, null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><label class="control-label" for="model-name-field"><i>Field</i></label><select class="form-control" id="model-name-field" name="modelName[field]"><option value="1" selected>foo</option><option value="2">bar</option></select></div>');
+        });
         it("is possible to override attributes on the field, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}
             expect(
@@ -236,6 +251,11 @@ describe("bootstrap3 ui adapter", function() {
             expect(
                 f.checkbox(model, 'field', 'My Value', null, { hint: 'updated hint text'})
             ).to.equal('<div class="form-group"><div class="checkbox"><label><input id="model-name-field" name="modelName[field]" type="checkbox" value="My Value"> Field</label></div><span class="help-block">updated hint text</span></div>');
+        });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.checkbox(model, 'field', 'My Value', null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><div class="checkbox"><label><i><input id="model-name-field" name="modelName[field]" type="checkbox" value="My Value"> Field</i></label></div></div>');
         });
         it("is possible to override attributes on the field, wrapper, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}
@@ -291,6 +311,11 @@ describe("bootstrap3 ui adapter", function() {
             expect(
                 f.radio(model, 'field', 'My Value', null, { hint: 'updated hint text'})
             ).to.equal('<div class="form-group"><div class="radio"><label><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</label></div><span class="help-block">updated hint text</span></div>');
+        });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.radio(model, 'field', 'My Value', null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><div class="radio"><label><i><input id="model-name-field-my-value" name="modelName[field]" type="radio" value="My Value"> Field</i></label></div></div>');
         });
         it("is possible to override attributes on the field, wrapper, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}
@@ -358,6 +383,11 @@ describe("bootstrap3 ui adapter", function() {
                 f.checkboxes(model, 'field', { 1: "foo", 2: "bar" }, null, { hint: "updated hint text" })
             ).to.equal('<div class="form-group"><label>Field</label><div class="checkbox"><label><input id="model-name-field-1" name="modelName[field][]" type="checkbox" value="1" checked> foo</label></div><div class="checkbox"><label><input id="model-name-field-2" name="modelName[field][]" type="checkbox" value="2" checked> bar</label></div><span class="help-block">updated hint text</span></div>');
         });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.checkboxes(model, 'field', { 1: "foo", 2: "bar" }, null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><label><i>Field</i></label><div class="checkbox"><label><input id="model-name-field-1" name="modelName[field][]" type="checkbox" value="1" checked> foo</label></div><div class="checkbox"><label><input id="model-name-field-2" name="modelName[field][]" type="checkbox" value="2" checked> bar</label></div></div>');
+        });
         it("is possible to override attributes on the field, wrapper, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}
             expect(
@@ -423,6 +453,11 @@ describe("bootstrap3 ui adapter", function() {
             expect(
                 f.radios(model, 'field', { 1: "foo", 2: "bar" }, null, { hint: "updated hint text" })
             ).to.equal('<div class="form-group"><label>Field</label><div class="radio"><label><input id="model-name-field-1" name="modelName[field]" type="radio" value="1" checked> foo</label></div><div class="radio"><label><input id="model-name-field-2" name="modelName[field]" type="radio" value="2"> bar</label></div><span class="help-block">updated hint text</span></div>');
+        });
+        it("is possible to add content before and after the label", function() {
+            expect(
+                f.radios(model, 'field', { 1: "foo", 2: "bar" }, null, { beforeLabel: '<i>', afterLabel: '</i>' })
+            ).to.equal('<div class="form-group"><label><i>Field</i></label><div class="radio"><label><input id="model-name-field-1" name="modelName[field]" type="radio" value="1" checked> foo</label></div><div class="radio"><label><input id="model-name-field-2" name="modelName[field]" type="radio" value="2"> bar</label></div></div>');
         });
         it("is possible to override attributes on the field, wrapper, label, input, hint and error components", function() {
             b.messages.hint = { ModelName: { field: 'hint text' }}

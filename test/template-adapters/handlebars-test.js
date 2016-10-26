@@ -154,10 +154,10 @@ describe("Handlebars template adapter", function() {
                     var errors = { title: 'invalid' };
                     expect(
                         template(
-                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" label="label text" required=true}}{{/form_fields_for}}',
+                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" label="label text" required=true afterLabel="after-label"}}{{/form_fields_for}}',
                             { model: model, errors: errors }
                         )
-                    ).to.equal(b.fields[type](model, 'title', errors, { label: "label text", required: true }));
+                    ).to.equal(b.fields[type](model, 'title', errors, { label: "label text", required: true, afterLabel: 'after-label' }));
                 });
             });
         });
@@ -168,10 +168,10 @@ describe("Handlebars template adapter", function() {
                 var options = { 1: "foo", 2: "bar" }
                 expect(
                     template(
-                        '{{#form_fields_for model errors}}{{form_select_field "title" options label="label text" required=true}}{{/form_fields_for}}',
+                        '{{#form_fields_for model errors}}{{form_select_field "title" options label="label text" required=true afterLabel="after-label"}}{{/form_fields_for}}',
                         { model: model, errors: errors, options: options }
                     )
-                ).to.equal(b.fields.select(model, 'title', options, errors, { label: "label text", required: true }));
+                ).to.equal(b.fields.select(model, 'title', options, errors, { label: "label text", required: true, afterLabel: 'after-label' }));
             });
             it("works as a block helper", function() {
                 var errors = { title: 'invalid' };
@@ -193,10 +193,10 @@ describe("Handlebars template adapter", function() {
                     var errors = { title: 'invalid' };
                     expect(
                         template(
-                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" "value" label="label text" required=true}}{{/form_fields_for}}',
+                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" "value" label="label text" required=true afterLabel="after-label"}}{{/form_fields_for}}',
                             { model: model, errors: errors }
                         )
-                    ).to.equal(b.fields[type](model, 'title', 'value', errors, { label: "label text", required: true }));
+                    ).to.equal(b.fields[type](model, 'title', 'value', errors, { label: "label text", required: true, afterLabel: 'after-label' }));
                 });
             });
         });
@@ -211,10 +211,10 @@ describe("Handlebars template adapter", function() {
                     var options = { 1: "foo", 2: "bar" }
                     expect(
                         template(
-                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" options label="label text" required=true}}{{/form_fields_for}}',
+                            '{{#form_fields_for model errors}}{{form_' + type + '_field "title" options label="label text" required=true afterLabel="after-label"}}{{/form_fields_for}}',
                             { model: model, errors: errors, options: options }
                         )
-                    ).to.equal(b.fields[type](model, 'title', options, errors, { label: "label text", required: true }));
+                    ).to.equal(b.fields[type](model, 'title', options, errors, { label: "label text", required: true, afterLabel: 'after-label' }));
                 });
             });
         });
