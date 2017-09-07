@@ -2,7 +2,8 @@ var Sequelize = require('sequelize');
 var b = require('../..');
 
 describe("Sequelize model adapter", function() {
-    var model = { Model: { name: 'SequelizeModel' } };
+    var modelV3 = { Model: { name: 'SequelizeV3Model' } };
+    var modelV4 = { constructor: { name: 'SequelizeV4Model' } };
 
     before(function() {
         b.use({ model: 'sequelize' });
@@ -10,8 +11,11 @@ describe("Sequelize model adapter", function() {
     after(function() { b.reset(); });
 
     describe("utils.modelName()", function() {
-        it("returns the model name of a Sequelize model", function() {
-            expect(b.utils.modelName(model)).to.equal('SequelizeModel');
+        it("returns the model name of a Sequelize v3 model", function() {
+            expect(b.utils.modelName(modelV3)).to.equal('SequelizeV3Model');
+        });
+        it("returns the model name of a Sequelize v4 model", function() {
+            expect(b.utils.modelName(modelV4)).to.equal('SequelizeV4Model');
         });
     });
 
